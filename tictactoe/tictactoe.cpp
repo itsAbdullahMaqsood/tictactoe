@@ -6,6 +6,52 @@
 #include <stdio.h>
 #include <string>
 #include <windows.h>
+#include<windows.h>
+
+void textcolor(int color)
+{
+    static int __BACKGROUND;
+
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+
+    GetConsoleScreenBufferInfo(h, &csbiInfo);               SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color + (__BACKGROUND << 4));
+}
+
+//int main() {
+//    // declaring Dimension
+//    int Dimension = 3;
+//    // initialzing the array
+//    char gameboard[3][3] = { {'X', 'O', 'X'}, {' ', 'O', 'X'}, {'O', ' ', ' '} };
+//    // characters depicting X and O
+//    char x = 'X';
+//    char o = 'O';
+//    printf("\n\n");
+//    // iterate row
+//    for (int i = 0; i < Dimension; i++)
+//    {
+//        cout << "\t\t\t";
+//        // iterate column
+//        for (int j = 0; j < Dimension; j++)
+//        {
+//            cout << " | ";
+//            if (gameboard[i][j] == x)
+//            {
+//                // if X is to be printed, change to red color
+//                textcolor(4);
+//            }
+//            else if (gameboard[i][j] == o)
+//            {
+//                // if O is to be printed, change the color to green
+//                textcolor(2);
+//            }
+//            cout << gameboard[i][j];
+//            // change to original white color
+//            textcolor(15);
+//        }
+//        cout << " |\n\t\t\t----------------" << endl;
+//    }
+//}
 
 using std::cout;
 using std::cin;
@@ -18,16 +64,154 @@ char restart;
 int k = 0,j,i;
 int reblink;
 int delay = 200;
+
 inline void clrscr() { system("cls"); }
 inline void c_out() {                                           //main interface
     cout << endl;
-    cout << "\t|\t" << space[0][0] << " \t|" << "\t" << space[0][1] << "\t|\t" << space[0][2] << "\t|" << endl;
+    cout << "\t|\t";
+    if (space[0][0] == 'X') {
+        textcolor(04);
+        cout << space[0][0];
+        textcolor(15);
+    }
+    else if (space[0][0] == 'O') {
+        textcolor(03);
+        cout << space[0][0];
+        textcolor(15);
+    }
+    else {
+        textcolor(15);
+        cout << space[0][0];
+    }
+    
+    
+    cout << " \t|" << "\t";
+    if (space[0][1] == 'X') {
+        textcolor(04);
+        cout << space[0][1];
+        textcolor(15);
+    }
+    else if (space[0][1] == 'O') {
+        textcolor(03);
+        cout << space[0][1];
+        textcolor(15);
+    }
+    else {
+        textcolor(15);
+        cout << space[0][1];
+    }
+    cout << "\t|\t";
+        if (space[0][2] == 'X') {
+            textcolor(04);
+            cout << space[0][2];
+            textcolor(15);
+        }
+        else if (space[0][2] == 'O') {
+            textcolor(03);
+            cout << space[0][2];
+            textcolor(15);
+        }
+        else {
+            textcolor(15);
+            cout << space[0][2];
+        }
+    cout << "\t|" << endl;
     cout << "\t|\t" << "  \t|" << "\t" << " \t|\t" << "\t|" << endl;
     cout << "\t|-----------------------------------------------" << "|" << endl;
-    cout << "\t|\t" << space[1][0] << " \t|" << "\t" << space[1][1] << "\t|\t" << space[1][2] << "\t|" << endl;
+    cout << "\t|\t";
+    if (space[1][0] == 'X') {
+        textcolor(04);
+        cout << space[1][0];
+        textcolor(15);
+    }
+    else if (space[1][0] == 'O') {
+        textcolor(03);
+        cout << space[1][0];
+        textcolor(15);
+    }
+    else {
+        textcolor(15);
+        cout << space[1][0];
+    }
+    cout << " \t|" << "\t";
+    if (space[1][1] == 'X') {
+        textcolor(04);
+        cout << space[1][1];
+        textcolor(15);
+    }
+    else if (space[1][1] == 'O') {
+        textcolor(03);
+        cout << space[1][1];
+        textcolor(15);
+    }
+    else {
+        textcolor(15);
+        cout << space[1][1];
+    }
+    cout << "\t|\t";
+    if (space[1][2] == 'X') {
+        textcolor(04);
+        cout << space[1][2];
+        textcolor(15);
+    }
+    else if (space[1][2] == 'O') {
+        textcolor(03);
+        cout << space[1][2];
+        textcolor(15);
+    }
+    else {
+        textcolor(15);
+        cout << space[1][2];
+    }
+    cout << "\t|" << endl;
     cout << "\t|\t" << "  \t|" << "\t" << " \t|\t" << "\t|" << endl;
     cout << "\t|-----------------------------------------------" << "|" << endl;
-    cout << "\t|\t" << space[2][0] << " \t|" << "\t" << space[2][1] << "\t|\t" << space[2][2] << "\t|" << endl;
+    cout << "\t|\t";
+    if (space[2][0] == 'X') {
+        textcolor(04);
+        cout << space[2][0];
+        textcolor(15);
+    }
+    else if (space[2][0] == 'O') {
+        textcolor(03);
+        cout << space[2][0];
+        textcolor(15);
+    }
+    else {
+        textcolor(15);
+        cout << space[2][0];
+    }
+    cout << " \t|" << "\t";
+    if (space[2][1] == 'X') {
+        textcolor(04);
+        cout << space[2][1];
+        textcolor(15);
+    }
+    else if (space[2][1] == 'O') {
+        textcolor(03);
+        cout << space[2][1];
+        textcolor(15);
+    }
+    else {
+        textcolor(15);
+        cout << space[2][1];
+    }
+    cout << "\t|\t";
+    if (space[2][2] == 'X') {
+        textcolor(04);
+        cout << space[2][2];
+        textcolor(15);
+    }
+    else if (space[2][2] == 'O') {
+        textcolor(03);
+        cout << space[2][2];
+        textcolor(15);
+    }
+    else {
+        textcolor(15);
+        cout << space[2][2];
+    }
+    cout << "\t|" << endl;
     cout << "\t|\t" << "  \t|" << "\t" << " \t|\t" << "\t|" << endl;
 }
 inline void blinkrow() {
@@ -35,14 +219,13 @@ inline void blinkrow() {
         clrscr();
         space[j][0] = ' ';
         space[j][1] = ' ';
-        space[j][2] = system("Color 0A");
         space[j][2] = ' ';
+        
         c_out();
         k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n";       
         Sleep(delay);
         space[j][0] = reblink;
         space[j][1] = reblink;
-        space[j][2] = system("Color 0A");
         space[j][2] = reblink;
         
         clrscr();
@@ -57,7 +240,7 @@ inline void blinkcolumn() {
         space[0][i] = ' ';
         space[1][i] = ' ';
         space[2][i] = ' ';
-        system("Color 0A");
+        
         c_out();
         k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n";
         Sleep(delay);
@@ -75,7 +258,7 @@ inline void check();
 inline void ask() {
     if (stop == true) {
         do {
-            system("Color 08");
+            
             cout << "\n\nDo you want to Play the Game Again? (y/n)\n\n\nEnter Your Choice: ";
             cin >> restart;
             if (restart == 'y') {
@@ -126,6 +309,7 @@ inline void check() {
         for (i = 0; i < 3; i++) {
             if (space[0][i] == space[1][i] && space[1][i] == space[2][i]) {
                 (/*(space[0][i] == 'X' || space[1][i] == 'X' || space[2][i] == 'X')*/ k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n");
+                
                 reblink = space[0][i];                
                 stop = true;
                 blinkcolumn();
@@ -150,10 +334,12 @@ inline void check() {
 inline void fillerror() {
     c_out();
     cout << "\n\n*****************************\n\nInvalid!! Already Filled\n\n*****************************\n\n\a";
+    k--;
 }
 
 int main()
 {
+    textcolor(15);
     cout << "\n\t----------------------------------( WELCOME TO THE GAME )----------------------------------" << endl << endl << endl;
     /*cout << "\t\t\t\t\t----------------------------------"<<endl;*/
     cout << "\t\t\t\tEnter First Player's Name: ";
@@ -167,7 +353,6 @@ int main()
         clrscr();      
         c_out();
         k = 0;
-        system("Color 08");
 
         while (k < 9) {
             int box;
@@ -204,8 +389,17 @@ int main()
                         fillerror();
                     }
                     else {
-                        k % 2 == 0 ? space[0][0] = 'X' : space[0][0] = 'O';
+                        if (k % 2 == 0){
+                            
+                            space[0][0] = 'X';
+                    }
+                        else{
+                            textcolor(05);
+                        space[0][0] = 'O';
+                    }
+                        textcolor(15);
                         c_out();
+                        
                     }
                     check();
                     break;
