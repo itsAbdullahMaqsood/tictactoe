@@ -346,9 +346,9 @@ inline void fillerror() {
         cout << "\n\n*****************************\n\nInvalid!! Already Filled\n\n*****************************\n\n\a";
         k--;
     }
-    else if (choice == 1 && k % 2 != 0) {
+    else if (choice == 1 && k % 1 == 0) {
         c_out();
-        cout << "\n\n*****************************\n\nPlease Wait, Loading.........\n\n*****************************\n\n";
+        cout << "Please Wait";
         k--;
     }
     else {
