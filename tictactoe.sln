@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tictactoe", "tictactoe\tictactoe.vcxproj", "{BAE52101-B615-4EF3-9D86-C45F3F87CB27}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{BAE52101-B615-4EF3-9D86-C45F3F87CB27}.Release|x64.Build.0 = Release|x64
 		{BAE52101-B615-4EF3-9D86-C45F3F87CB27}.Release|x86.ActiveCfg = Release|Win32
 		{BAE52101-B615-4EF3-9D86-C45F3F87CB27}.Release|x86.Build.0 = Release|Win32
+		{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}.Debug|x64.ActiveCfg = Debug|x64
+		{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}.Debug|x64.Build.0 = Debug|x64
+		{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}.Debug|x86.ActiveCfg = Debug|Win32
+		{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}.Debug|x86.Build.0 = Debug|Win32
+		{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}.Release|x64.ActiveCfg = Release|x64
+		{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}.Release|x64.Build.0 = Release|x64
+		{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}.Release|x86.ActiveCfg = Release|Win32
+		{FE05FA95-0989-4E6D-8C1E-2FA1464B5D70}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

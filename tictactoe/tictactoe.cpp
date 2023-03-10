@@ -6,9 +6,8 @@
 #include <stdio.h>
 #include <string>
 #include <windows.h>
-#include<windows.h>
 
-void textcolor(int color)
+void textcolor(int color)               //code to change text color
 {
     static int __BACKGROUND;
 
@@ -17,41 +16,6 @@ void textcolor(int color)
 
     GetConsoleScreenBufferInfo(h, &csbiInfo);               SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color + (__BACKGROUND << 4));
 }
-
-//int main() {
-//    // declaring Dimension
-//    int Dimension = 3;
-//    // initialzing the array
-//    char gameboard[3][3] = { {'X', 'O', 'X'}, {' ', 'O', 'X'}, {'O', ' ', ' '} };
-//    // characters depicting X and O
-//    char x = 'X';
-//    char o = 'O';
-//    printf("\n\n");
-//    // iterate row
-//    for (int i = 0; i < Dimension; i++)
-//    {
-//        cout << "\t\t\t";
-//        // iterate column
-//        for (int j = 0; j < Dimension; j++)
-//        {
-//            cout << " | ";
-//            if (gameboard[i][j] == x)
-//            {
-//                // if X is to be printed, change to red color
-//                textcolor(4);
-//            }
-//            else if (gameboard[i][j] == o)
-//            {
-//                // if O is to be printed, change the color to green
-//                textcolor(2);
-//            }
-//            cout << gameboard[i][j];
-//            // change to original white color
-//            textcolor(15);
-//        }
-//        cout << " |\n\t\t\t----------------" << endl;
-//    }
-//}
 
 using std::cout;
 using std::cin;
@@ -64,11 +28,16 @@ char restart;
 int k = 0,j,i;
 int reblink;
 int delay = 200;
+int choice=0;
+int start = 1;
+int ennd = 9;
+
 
 inline void clrscr() { system("cls"); }
-inline void c_out() {                                           //main interface
+inline void c_out() {                                           // console game box
     cout << endl;
     cout << "\t|\t";
+
     if (space[0][0] == 'X') {
         textcolor(04);
         cout << space[0][0];
@@ -214,6 +183,7 @@ inline void c_out() {                                           //main interface
     cout << "\t|" << endl;
     cout << "\t|\t" << "  \t|" << "\t" << " \t|\t" << "\t|" << endl;
 }
+
 inline void blinkrow() {
     for (int n = 0; n < 6; n++) {
         clrscr();
@@ -234,13 +204,50 @@ inline void blinkrow() {
         Sleep(delay);
     }
 }
+inline void blinkdiagonal() {
+    for (int n = 0; n < 6; n++) {
+        clrscr();
+        space[0][0] = ' ';
+        space[1][1] = ' ';
+        space[2][2] = ' ';
+
+        c_out();
+        k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n";
+        Sleep(delay);
+        clrscr();
+        space[0][0] = reblink;
+        space[1][1] = reblink;
+        space[2][2] = reblink;
+        c_out();
+        k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n";
+        Sleep(delay);
+    }
+}
+inline void blinkdiagonal2() {
+    for (int n = 0; n < 6; n++) {
+        clrscr();
+        space[0][2] = ' ';
+        space[1][1] = ' ';
+        space[2][0] = ' ';
+
+        c_out();
+        k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n";
+        Sleep(delay);
+        clrscr();
+        space[0][2] = reblink;
+        space[1][1] = reblink;
+        space[2][0] = reblink;
+        c_out();
+        k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n";
+        Sleep(delay);
+    }
+}
 inline void blinkcolumn() {
     for (int n = 0; n < 6; n++) {
         clrscr();
         space[0][i] = ' ';
         space[1][i] = ' ';
         space[2][i] = ' ';
-        
         c_out();
         k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n";
         Sleep(delay);
@@ -282,7 +289,7 @@ inline void ask() {
                 cout << "\n\n\t\t\t\t\t*****************************\n\n\t\t\t\t\t  Thank You For Playing !!!\n\n\t\t\t\t\t*****************************\n\n";
             }
             if(restart != 'y' && restart != 'n'){
-                cin.clear();
+                cin.clear(); 
                 cin.ignore(100, '\n');
                 clrscr();
                 c_out();
@@ -309,22 +316,24 @@ inline void check() {
         for (i = 0; i < 3; i++) {
             if (space[0][i] == space[1][i] && space[1][i] == space[2][i]) {
                 (/*(space[0][i] == 'X' || space[1][i] == 'X' || space[2][i] == 'X')*/ k % 2 == 0 ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n");
-                
                 reblink = space[0][i];                
                 stop = true;
                 blinkcolumn();
-                
-                
-                
             }
             else (column += 1);
         }
         if (column == 3) {
-            if (((space[0][0] == space[1][1] && space[1][1] == space[2][2]) || (space[0][2] == space[1][1] && space[1][1] == space[2][0]))) {
-                (((space[0][0] == 'X' && space[1][1] == 'X') || (space[0][2] == 'X' && space[1][1] == 'X')) ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n");
+            if (space[0][0] == space[1][1] && space[1][1] == space[2][2]) {
+                ((space[0][0] == 'X' && space[1][1] == 'X') ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n");
+                reblink = space[0][0];
                 stop = true;
-                
-
+                blinkdiagonal();
+            }
+            if (space[0][2] == space[1][1] && space[1][1] == space[2][0]) {
+                ((space[0][2] == 'X' && space[1][1] == 'X') ? cout << "\n--------------------\n" << "  " << player1 << " wins" << "\n--------------------\n" : cout << "\n--------------------\n" << "  " << player2 << " wins" << "\n--------------------\n");
+                reblink = space[0][2];
+                stop = true;
+                blinkdiagonal2();
             }
         }
     }
@@ -332,23 +341,65 @@ inline void check() {
 }
 
 inline void fillerror() {
-    c_out();
-    cout << "\n\n*****************************\n\nInvalid!! Already Filled\n\n*****************************\n\n\a";
-    k--;
+    if (choice == 2) {
+        c_out();
+        cout << "\n\n*****************************\n\nInvalid!! Already Filled\n\n*****************************\n\n\a";
+        k--;
+    }
+    else if (choice == 1 && k % 1 == 0) {
+        c_out();
+        cout << "Please Wait";
+        k--;
+    }
+    else {
+        c_out();
+        cout << "\n\n*****************************\n\nInvalid!! Already Filled\n\n*****************************\n\n\a";
+        k--;
+    }
 }
 
 int main()
-{
-    textcolor(15);
-    cout << "\n\t----------------------------------( WELCOME TO THE GAME )----------------------------------" << endl << endl << endl;
-    /*cout << "\t\t\t\t\t----------------------------------"<<endl;*/
-    cout << "\t\t\t\tEnter First Player's Name: ";
+{   
 
-    getline(cin, player1);
-    cout << "\n\n";
-    cout << "\t\t\t-----------------------------------------------------" << endl << endl << endl;
-    cout << "\t\t\t\tEnter Second Player's Name: ";
-    getline(cin, player2);
+    textcolor(15);
+    do {
+        cout << "1. Player vs Computer \n2. Player vs Player\n\nEnter your choice:";
+
+        cin >> choice;
+        if (cin.fail()) {
+            clrscr();
+            cout << "\t\t    *******************\n\t\t\tWrong input\n\t\t    *******************\n\n\a";
+            cin.clear();
+            cin.ignore(1000, '\n');
+            continue;
+        }
+        switch (choice) {
+        case 2: 
+            clrscr();
+            cout << "\n\t----------------------------------( WELCOME TO THE GAME )----------------------------------" << endl << endl << endl;
+            cout << "\t\t\t\tEnter First Player's Name: ";
+            cin.ignore();
+            getline(cin, player1);
+            cout << "\n\n";
+            cout << "\t\t\t-----------------------------------------------------" << endl << endl << endl;
+            cout << "\t\t\t\tEnter Second Player's Name: ";
+            cin.ignore();
+            getline(cin, player2);
+            break;
+        case 1:
+            clrscr();
+            cout << "\n\t----------------------------------( WELCOME TO THE GAME )----------------------------------" << endl << endl << endl;
+            cout << "\t\t\t\tEnter Player's Name: ";
+            cin.ignore();
+            getline(cin, player1);
+            break;
+        default: 
+            clrscr();
+            cout << "\t\t    *******************\n\t\t\tWrong input\n\t\t    *******************\n\n\a";
+        }
+        
+    } while (choice != 1 && choice != 2);
+    
     do {
         clrscr();      
         c_out();
@@ -356,56 +407,75 @@ int main()
 
         while (k < 9) {
             int box;
-            if (k % 2 == 0) {
-                cout << "\n"  << player1 << "'s turn: ";
-                cin >> box;
-                if (cin.fail() || box <= 0 || box > 9) {
-                    clrscr();
-                    c_out();
-                    cout << "\n\n******************************************\n\nInvalid input. Please enter a number (1-9)\n\n******************************************\n\n\a";
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    continue;
+            switch (choice) {
+            case 2:
+                if (k % 2 == 0) {
+                    cout << "\n" << player1 << "'s turn: ";
+                    cin >> box;
+                    if (cin.fail() || box <= 0 || box > 9) {
+                        clrscr();
+                        c_out();
+                        cout << "\n\n******************************************\n\nInvalid input. Please enter a number (1-9)\n\n******************************************\n\n\a";
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        continue;
+                    }
                 }
-            }
-            else {
-                cout << "\n" << player2 << "'s turn: ";
-                cin >> box;
-                if (cin.fail() || box <= 0 || box > 9) {
-                    clrscr();
-                    c_out();
-                    cout << "\n\n******************************************\n\nInvalid input. Please enter a number (1-9)\n\n******************************************\n\n\a";
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    continue;
+                else {
+                    cout << "\n" << player2 << "'s turn: ";
+                    cin >> box;
+                    if (cin.fail() || box <= 0 || box > 9) {
+                        clrscr();
+                        c_out();
+                        cout << "\n\n******************************************\n\nInvalid input. Please enter a number (1-9)\n\n******************************************\n\n\a";
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        continue;
+                    }
                 }
+                break;
+            case 1:
+                if (k % 2 == 0) {
+                    cout << "\n" << player1 << "'s turn: ";
+                    cin >> box;
+                    if (cin.fail() || box <= 0 || box > 9) {
+                        clrscr();
+                        c_out();
+                        cout << "\n\n******************************************\n\nInvalid input. Please enter a number (1-9)\n\n******************************************\n\n\a";
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        continue;
+                    }
+                }
+                else {
+                    player2 = "Computer";
+                    cout << "\n" << "Computer's turn: ";
+                    srand(time(0));
+                    box = (rand() % (ennd - start + 1)) + start;
+                    
+                }
+
                 
+                break;
             }
+            
+        
             if (box == 1 || box == 2 || box == 3 || box == 4 || box == 5 || box == 6 || box == 7 || box == 8 || box == 9) {
                 clrscr();
                 switch (box) {
                 case 1:
                     if (space[0][0] == 'X' || space[0][0] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
-                        if (k % 2 == 0){
-                            
-                            space[0][0] = 'X';
-                    }
-                        else{
-                            textcolor(05);
-                        space[0][0] = 'O';
-                    }
-                        textcolor(15);
+                        k % 2 == 0 ? space[0][0] = 'X' : space[0][0] = 'O';
                         c_out();
-                        
                     }
                     check();
                     break;
                 case 2:
                     if (space[0][1] == 'X' || space[0][1] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
                         k % 2 == 0 ? space[0][1] = 'X' : space[0][1] = 'O';
@@ -415,7 +485,7 @@ int main()
                     break;
                 case 3:
                     if (space[0][2] == 'X' || space[0][2] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
                         k % 2 == 0 ? space[0][2] = 'X' : space[0][2] = 'O';
@@ -425,7 +495,7 @@ int main()
                     break;
                 case 4:
                     if (space[1][0] == 'X' || space[1][0] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
                         k % 2 == 0 ? space[1][0] = 'X' : space[1][0] = 'O';
@@ -435,7 +505,7 @@ int main()
                     break;
                 case 5:
                     if (space[1][1] == 'X' || space[1][1] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
                         k % 2 == 0 ? space[1][1] = 'X' : space[1][1] = 'O';
@@ -445,7 +515,7 @@ int main()
                     break;
                 case 6:
                     if (space[1][2] == 'X' || space[1][2] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
                         k % 2 == 0 ? space[1][2] = 'X' : space[1][2] = 'O';
@@ -455,7 +525,7 @@ int main()
                     break;
                 case 7:
                     if (space[2][0] == 'X' || space[2][0] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
                         k % 2 == 0 ? space[2][0] = 'X' : space[2][0] = 'O';
@@ -465,7 +535,7 @@ int main()
                     break;
                 case 8:
                     if (space[2][1] == 'X' || space[2][1] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
                         k % 2 == 0 ? space[2][1] = 'X' : space[2][1] = 'O';
@@ -475,7 +545,7 @@ int main()
                     break;
                 case 9:
                     if (space[2][2] == 'X' || space[2][2] == 'O') {
-                        fillerror();
+                        fillerror(); 
                     }
                     else {
                         k % 2 == 0 ? space[2][2] = 'X' : space[2][2] = 'O';
@@ -492,12 +562,8 @@ int main()
                 stop = true;
                 ask();
             }
-
-
-            
             k++;
-        }
-        
+        } 
     } while (restart == 'y');
     return 0;
 }
