@@ -7,7 +7,7 @@
 #include <string>
 #include <windows.h>
 
-void textcolor(int color)               //code to change text color
+void textcolor(int color) //code to change text color
 {
     static int __BACKGROUND;
 
