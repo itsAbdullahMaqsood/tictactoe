@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string>
 #include <windows.h>
+using namespace std;
 
 void textcolor(int color)            //code to change text color
 {
@@ -17,9 +18,7 @@ void textcolor(int color)            //code to change text color
     GetConsoleScreenBufferInfo(h, &csbiInfo);               SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color + (__BACKGROUND << 4));
 }
 
-using std::cout;
-using std::cin;
-using namespace std;
+
 char space[3][3] = { {'1','2','3'},{'4','5','6'},{'7','8','9'} };
 string player1;
 string player2;
