@@ -8,7 +8,7 @@
 #include <windows.h>
 using namespace std;
 
-void textcolor(int color)             //code to change text color
+void textcolor(int color)              //code to change text color ghufubbuh
 {
     static int __BACKGROUND;
 
